@@ -68,6 +68,27 @@ void* get_d_comp (array* a, void* elem, int (*compare) (void*, void*))
     return NULL;
 }
 
+//Untested
+/**
+ * @brief Returns a copy of the elements filtered by the filter function
+ * 
+ * @param a 
+ * @param filter 
+ * @return array* 
+ */
+array* filter_d_array (array* a, int (*filter) (void*))
+{
+    array* ret= NULL;
+    for (int i= 0; i< a->pos; i++)
+    {
+        if (!filter (a->a[i]))
+        {
+            push_d_array (&ret, a->a[i]);
+        }
+    }
+    return ret;
+}
+
 /**
  * @brief Frees the d_array struct including the adresses passed by arg in 'push' calls
  * 
