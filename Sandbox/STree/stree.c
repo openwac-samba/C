@@ -1,32 +1,43 @@
-struct bt_node;
+#include <stdlib.h>
+#define SIZE 3
 
-typedef struct bt_node
+typedef struct elem
 {
     void* key;
     void* content;
-    int bal;
-    struct bt_node* r;
-    struct bt_node* l;
-}bt_node; 
+}elem;
 
-bt_node* push_bt (bt_node* n, void* key, void* content, int (* compare) (void*, void*), void (* insert) (void**, void*))
+typedef struct tree
 {
-    if (!n)
-    {
-        n= new_node ();
-        insert (&n->content, content);
-        //Fix balance
-    }
-    else
-    {
-        int c= compare (n->key, key);
-        if (!(c= compare))                                                           //Compare determined the keys to match
-            insert (&n->content, content);
-        else
-            if (c> 0)
-                n->r= push_bt (n->r, key, content, compare, insert);
-            else
-                n->l= push_bt (n->l, key, content, compare, insert);
-    }
-    return n;
+    int elem;
+    int size;
+    elem* array;
+}tree;
+
+//Functions
+
+static tree* init ()
+{
+    tree* t= malloc (sizeof (tree));
+    t->elem= 0;
+    t->size= SIZE;
+    t->array= calloc (SIZE, sizeof (elem));
+    return t;
+}
+
+//API
+
+/**
+ * @brief Push an element into a tree
+ * 
+ * @param t adress to a pointer of tree
+ * @param key key for comparisons
+ * @param content adress to be refered byt the tree
+ * @param compare function to compare elements using the key parameter
+ */
+void push (tree** t, void* key, void* content, int (*compare) (void*, void*))
+{
+    if (!*t)
+        *t= init ();
+    //insert and compare
 }
