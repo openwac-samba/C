@@ -4,6 +4,7 @@ typedef struct bt_node
 {
     void* key;
     void* content;
+    int bal;
     struct bt_node* r;
     struct bt_node* l;
 }bt_node; 

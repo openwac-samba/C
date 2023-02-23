@@ -68,7 +68,6 @@ void* get_d_comp (array* a, void* elem, int (*compare) (void*, void*))
     return NULL;
 }
 
-//Untested
 /**
  * @brief Returns a copy of the elements filtered by the filter function
  * 
