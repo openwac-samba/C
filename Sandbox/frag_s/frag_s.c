@@ -77,15 +77,18 @@ frag_s* push_frag_s (frag_s* f, void* key, void* content, void (*push) (void*, v
         f= init_frag_s ();
     for (int i= 1; i> 0;)                                                       //FIXME
     {
-        if (!(cmp= in_interval (f->f[i].i, key, compare)))                      //Found the frag in wich to insert
+        if (f->f[i].pos< Max_Size)
             insert_frag (f, i, key, content, push, compare);
         else
-            if (cmp> 0)
-                //Go Right
-                return f;
+            if (!(cmp= in_interval (f->f[i].i, key, compare)))                  //Found the frag in wich to insert
+                insert_frag (f, i, key, content, push, compare);
             else
-                //Go Left
-                return NULL;
+                if (cmp> 0)
+                    //Go Right
+                    return f;
+                else
+                    //Go Left
+                    return NULL;
     }
     return f;
 }
